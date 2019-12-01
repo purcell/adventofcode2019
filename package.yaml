@@ -1,0 +1,40 @@
+name:                adventofcode2019
+version:             0.1.0.0
+github:              "purcell/adventofcode2019"
+license:             BSD3
+author:              "Steve Purcell"
+maintainer:          "steve@sanityinc.com"
+copyright:           "2019 Steve Purcell"
+
+extra-source-files:
+- README.md
+- ChangeLog.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Web
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on GitHub at <https://github.com/purcell/adventofcode2019#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+- containers
+- text
+- megaparsec
+
+library:
+  source-dirs: src
+
+executables:
+  adventofcode2019-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - adventofcode2019
