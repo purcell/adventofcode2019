@@ -24,6 +24,7 @@ dependencies:
 - containers
 - text
 - megaparsec
+- vector
 
 library:
   source-dirs: src
