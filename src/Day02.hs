@@ -3,7 +3,7 @@ module Day02 where
 import qualified Parse as P
 import Parse (Parser)
 import qualified Data.Vector as V
-
+import Data.List (find)
 
 type OpCode = Int
 type Program = V.Vector OpCode
@@ -20,13 +20,20 @@ run = runFrom 0
                 atAt = at . at
                 setAt n v = prog V.// [(n, v)]
 
+
+input :: Int -> Int -> Program -> Program
+input a b p = p V.// [(1, a), (2, b)]
+
 restore :: Program -> Program
-restore p = p V.// [(1, 12), (2, 2)]
+restore = input 12 2
 
 day2a :: Program -> Int
 day2a = (V.! 0) . run . restore
 
--- day2b = undefined
+day2b :: Program -> Int
+day2b prog = 100 * n + v
+  where
+  Just (n, v) = find (\(n, v) -> 19690720 == run (input n v prog) V.! 0) [(n, v) | n <- [0..99], v <- [0..99]]
 
 program :: Parser Program
 program = V.fromList <$> (P.sepBy1 P.decimal (P.char ',') <* P.newline)
@@ -37,6 +44,6 @@ day2 = do
   prog <- P.parseFile program "input/02.txt"
   putStrLn "A:"
   print (day2a prog)
-  -- putStrLn "B:"
-  -- print (day1b vals)
+  putStrLn "B:"
+  print (day2b prog)
 
